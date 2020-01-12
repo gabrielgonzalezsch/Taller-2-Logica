@@ -123,10 +123,36 @@ def frutaPodrida(firmeza):
 	return podrida
 
 def entradaUsuario():
-	altura = input('Ingrese la altura de la Cereza [18, 32] mm: ')
-	diametro = input('Ingrese el diametro del fruto [18, 32] mm: ')
-	transparencia = input('Ingrese la transparencia del fruto [0, 100] %: ')
-	cobertura = input('Ingrese la cobertura de las manchas del fruto [0, 100] %: ')
+
+	while True:
+		altura = input('Ingrese la altura de la Cereza [18, 32] mm: ')
+		if 18 <= int(altura) <= 32:
+			break
+		else:
+			print("Ingrese un valor entre 18  y 32")
+
+	while True:
+		diametro = input('Ingrese el diametro del fruto [18, 32] mm: ')
+		if 18 <= int(diametro) <= 32:
+			break
+		else:
+			print("Ingrese un valor entre 18  y 32")
+
+	while True:
+		transparencia = input('Ingrese la transparencia del fruto [0, 100] %: ')
+		if 0 <= int(transparencia) <= 100:
+			break
+		else:
+			print("Ingrese un valor entre 0  y 100")
+
+	while True:
+		cobertura = input('Ingrese la cobertura de las manchas del fruto [0, 100] %: ')
+		if 0 <= int(cobertura) <= 100:
+			break
+		else:
+			print("Ingrese un valor entre 0  y 100")
+
+
 	return altura, diametro, transparencia, cobertura
 
 
