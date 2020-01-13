@@ -155,6 +155,81 @@ def entradaUsuario():
 
 	return altura, diametro, transparencia, cobertura
 
+def salidaEmbalaje(diametro, comercio):
+	if(comercio == "Desecho"):
+		return 16
+	if(diametro == 18):
+		return 1
+	elif(diametro == 19):
+		return 2
+	elif(diametro == 20):
+		return 3
+	elif(diametro == 21):
+		return 4
+	elif(diametro == 22):
+		return 5
+	elif(diametro == 23):
+		return 6
+	elif(diametro == 24):
+		return 7
+	elif(diametro == 25):
+		return 8
+	elif(diametro == 26):
+		return 9
+	elif(diametro == 27):
+		return 10
+	elif(diametro == 28):
+		return 11
+	elif(diametro == 29):
+		return 12
+	elif(diametro == 30):
+		return 13
+	elif(diametro == 31):
+		return 14
+	elif(diametro == 32):
+		return 15
+
+def escribirArchivoSalida(resultadoComercio, altura, diametro, transparencia, cobertura):
+	
+	nombreArchivo = "Cereza_"+str(altura)+"_"+str(diametro)+"_"+str(transparencia)+"_"+str(cobertura)+".txt"
+	archivo = open(nombreArchivo, "w")
+	archivo.write("Niveles capturados: \n")
+	archivo.write("	Calibre: "+str(diametro)+" mm \n")
+	resultadoForma = float(diametro) / altura
+	forma = ""
+	if(resultadoForma < 0.50 ):
+		forma = "Angosta"
+	elif(0.50 <= resultadoForma < 1.50):
+		forma = "Normal"
+	else:
+		forma = "Ancha"
+	archivo.write("	Forma: "+forma+"\n")
+	firmeza = ""
+	if(transparencia < 30):
+		firmeza = "Verde"
+	elif(30 <= transparencia < 60):
+		firmeza = "Madura"
+	else:
+		firmeza = "Podrida"
+	archivo.write("	Firmeza de la pulpa: "+firmeza+"\n")
+	resultadoCobertura = ""
+	if(cobertura < 30):
+		resultadoCobertura = "Leve"
+	elif(30 <= cobertura < 60):
+		resultadoCobertura = "Parcial"
+	else:
+		resultadoCobertura = "Completa"
+	archivo.write("	Cobertura de manchas: "+resultadoCobertura+"\n")
+	comercio = ""
+	if(resultadoComercio < 30):
+		comercio = "Desecho"
+	elif(30 <= resultadoComercio < 60):
+		comercio = "Comercial"
+	else:
+		comercio = "Exportable"
+	archivo.write("Comercializacion: "+comercio+"\n")
+	salida = salidaEmbalaje(diametro, comercio)
+	archivo.write("Numero salida: "+str(salida))
 
 def main():
 	altura, diametro, transparencia, cobertura = entradaUsuario()
@@ -170,6 +245,7 @@ def main():
 	resultadoSimulacion.input['Forma'] = float(diametro) / altura
 	resultadoSimulacion.compute()
 	resuladoComercio = int(resultadoSimulacion.output['Comercializacion'])
+	escribirArchivoSalida(resuladoComercio, altura, diametro, transparencia, cobertura)
 
 	# Resultados Antecedentes
 	firmezaAntecedente.view(sim=resultadoSimulacion)
