@@ -33,16 +33,16 @@ def reglas(forma, firmeza, cobertura, comercializacion):
 	regla27 = ctrl.Rule(forma['Ancha'] & firmeza['Podrida'] & cobertura['Completa'], comercializacion['Desecho'])
 	return [regla1, regla2, regla3, regla4, regla5, regla6, regla7, regla8, regla9, regla10, regla11, regla12, regla13, regla14, regla15, regla16, regla17, regla18, regla19, regla20, regla21, regla22, regla23, regla24, regla25, regla26, regla27] 
 
-def graficar(x,y,names,xlabel,ylabel,title):
+def graficar(x, y, nombres, xlabel, ylabel, title):
+	plt.figure(title)
 	cont = 0
 	for variableLinguistica in y:
-		plt.plot(x, y[cont], label=names[cont])
+		plt.plot(x, y[cont], label=nombres[cont])
 		cont = cont + 1
 	plt.legend(numpoints=1)
 	plt.ylabel(ylabel)
 	plt.xlabel(xlabel)
 	plt.title(title)
-	plt.show()
 	return
 
 def coberturaFruto():
@@ -256,6 +256,5 @@ def main():
 	comercioConsecuente.view(sim=resultadoSimulacion)
 
 	plt.show()
-	print(resuladoComercio)
 
 main()
