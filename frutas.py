@@ -195,7 +195,7 @@ def escribirArchivoSalida(resultadoComercio, altura, diametro, transparencia, co
 	archivo = open(nombreArchivo, "w")
 	archivo.write("Niveles capturados: \n")
 	archivo.write("	Calibre: "+str(diametro)+" mm \n")
-	resultadoForma = float(diametro) / altura
+	resultadoForma = float(diametro) / float(altura)
 	forma = ""
 	if(resultadoForma < 0.50 ):
 		forma = "Angosta"
@@ -240,12 +240,12 @@ def main():
 	resultadoReglas = reglas(formaAntedecedente, firmezaAntecedente, coberturaAntecedente, comercioConsecuente)
 	controlador = ctrl.ControlSystem(resultadoReglas)
 	resultadoSimulacion = ctrl.ControlSystemSimulation(controlador)
-	resultadoSimulacion.input['Firmeza'] = transparencia
-	resultadoSimulacion.input['Cobertura'] = cobertura
-	resultadoSimulacion.input['Forma'] = float(diametro) / altura
+	resultadoSimulacion.input['Firmeza'] = int(transparencia)
+	resultadoSimulacion.input['Cobertura'] = int(cobertura)
+	resultadoSimulacion.input['Forma'] = float(diametro) / float(altura)
 	resultadoSimulacion.compute()
 	resuladoComercio = int(resultadoSimulacion.output['Comercializacion'])
-	escribirArchivoSalida(resuladoComercio, altura, diametro, transparencia, cobertura)
+	escribirArchivoSalida(resuladoComercio, int(altura), int(diametro), int(transparencia), int(cobertura))
 
 	# Resultados Antecedentes
 	firmezaAntecedente.view(sim=resultadoSimulacion)
